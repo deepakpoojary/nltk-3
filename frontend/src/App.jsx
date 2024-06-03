@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./App.css"; // We'll move the CSS into a separate file
 import html2pdf from "html2pdf.js"; // Import html2pdf.js
+import { IoMdSend } from "react-icons/io";
 
 const App = () => {
   const [messages, setMessages] = useState([]);
@@ -80,7 +81,7 @@ const App = () => {
     }
   };
   const getScaleFactor = () => {
-    return Math.min(window.innerWidth / 794 - 0.021, 1);
+    return Math.min(window.innerWidth / 650, 1);
   };
   return (
     <div id="chatbox">
@@ -95,15 +96,16 @@ const App = () => {
                 <div
                   className="html-frame"
                   style={{
-                    transform: `scale(${getScaleFactor()})`,
+                    // transform: `scale(${getScaleFactor()})`,
                     transformOrigin: "top left",
                   }}
                 >
                   <span dangerouslySetInnerHTML={{ __html: message.text }} />
+                  
                 </div>
                 <button className="thisbutton" onClick={handleDownload}>
-                  Download PDF
-                </button>
+                    Download PDF
+                  </button>
               </>
             ) : (
               message.text
@@ -116,17 +118,17 @@ const App = () => {
           </p>
         )}
       </div>
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Type your message here"
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        onKeyDown={handleKeyPress}
-      />
-      <button className="thisbutton" onClick={sendMessage}>
-        Send
-      </button>
+      <div id="userInputContainer">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type your message here"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          onKeyDown={handleKeyPress}
+        />
+        <IoMdSend className="custom-send-icon" onClick={sendMessage} />
+      </div>
 
       {/* {!isLoading && (
         <button className="thisbutton" onClick={fetchHtmlContent}>
