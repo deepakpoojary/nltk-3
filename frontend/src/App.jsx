@@ -6,21 +6,32 @@ import { IoMdSend } from "react-icons/io";
 import Slider from "react-slick";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
+const buttons1 = [
+  "Soil report",
+  "Contact Details",
+  "Soil health card",
+  "What is SHC",
+];
 const App = () => {
   const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
   };
   const [messages, setMessages] = useState([
     {
       sender: "bot",
-      text: "Hello, Please choose any one",
-      buttons: ["Soil report ", "suggestions", "Soil health card", "Questions"],
+      text: "Hello, How can I help you ?",
+      // buttons: [
+      //   "Get your soil report",
+      //   "Soil health card",
+      //   "What is SHC",
+      //   "Contact Details",
+      // ],
     },
     // {
     //   sender: "bot",
@@ -168,7 +179,6 @@ const App = () => {
                       }}
                     >
                       <span
-                        // style={{ backgroundColor: "grey" }}
                         dangerouslySetInnerHTML={{ __html: message.text }}
                       />
                     </div>
@@ -207,6 +217,22 @@ const App = () => {
             <strong>Bot:</strong> Loading...
           </p>
         )}
+      </div>
+      <div className="button-slider1">
+        <Slider {...settings}>
+          {buttons1.map((button, idx) => (
+            <div key={idx} className="button-container">
+              {/* Improved button styling with semantic class and hover effect */}
+              <button
+                className="chat-button"
+                onClick={() => handleButtonClick(button)}
+              >
+                {button.trim()}{" "}
+                {/* Remove trailing spaces for better display */}
+              </button>
+            </div>
+          ))}
+        </Slider>
       </div>
       <div id="userInputContainer">
         <input

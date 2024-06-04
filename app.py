@@ -98,6 +98,17 @@ def another_response(user_input):
         response = replace_placeholders(response, match)
     
     return response
+def check_similar_report(message):
+  message = message.lower().strip()
+
+  # Define keywords related to reports
+  report_words = ["report", "test"]
+
+  # Check for at least one keyword and some similarity
+  for word in report_words:
+    if word in message and any(w.startswith(word) for w in message.split()):
+      return True
+  return False
 
 def chatbot_response(user_message):
     
@@ -134,8 +145,8 @@ def home():
 def chat():
     user_message = request.json.get("message")
     print(user_message)
-    if user_message == "report":
-        response = "Please enter your numbers."
+    if check_similar_report(user_message):
+      response = "Please enter your phone number"
     elif re.fullmatch(r'\d{10}', user_message):  # Check if the message is a 10-digit number
         response = chatbot_response(user_message)
     else:
