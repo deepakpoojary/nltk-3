@@ -48,7 +48,7 @@ pairs.append(('(.*) (location|city) ?', 'I am a virtual assistant, I live in the
 # Add exit response
 pairs.append(('quit', 'Bye! Take care.'))
 # Define the file path
-file_path = 'book4.csv'
+file_path = 'Book2.csv'
 
 # Define the column numbers containing the query text and answer
 query_text_column = 2  # Assuming the 11th column (0-indexed) contains query text
