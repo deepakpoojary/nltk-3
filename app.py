@@ -37,7 +37,7 @@ pairs.append(('my name is (.*)', 'Hello %1, how are you today?'))
 pairs.append(('(hi|hello|hey)', 'Hello!'))
 
 # Add name response
-pairs.append(('(.*) your name ?', 'My name is ChatBot.'))
+pairs.append(('(.*) your name ?', 'My name is chatBot.'))
 
 # Add default response for 'how are you' question
 pairs.append(('how are you (.*)', 'I am doing well, thank you!'))
