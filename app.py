@@ -124,9 +124,10 @@ def chatbot_response(user_message):
 
     try:
         response = client.execute(query, variable_values=params)
-        # print(response)
+        # print("hello"+response.get('getTestForPortal'))
         # rep=html.unescape(response['getTestForPortal'][0]['html'])
-        
+        if response.get('getTestForPortal') is None or not response['getTestForPortal']:
+            return "The phone number does not exist in the database."
         return response
         
     except Exception as e:
