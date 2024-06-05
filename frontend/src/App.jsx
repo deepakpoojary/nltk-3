@@ -53,7 +53,7 @@ const App = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "/chat",
+        "https://dialogflow-dev.krishitantra.com/backend/chat",
         { message: userInput },
         {
           headers: { "Content-Type": "application/json" },
@@ -89,7 +89,7 @@ const App = () => {
     setIsLoading(true);
     try {
       const response = await axios.post(
-        "/chat",
+        "https://dialogflow-dev.krishitantra.com/backend/chat",
         { message: option },
         {
           headers: { "Content-Type": "application/json" },
