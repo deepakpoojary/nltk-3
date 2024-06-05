@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./App.css"; // We'll move the CSS into a separate file
 import html2pdf from "html2pdf.js"; // Import html2pdf.js
@@ -14,7 +14,7 @@ const buttons1 = [
 ];
 const App = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 2,
@@ -41,7 +41,7 @@ const App = () => {
   ]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const chatlogRef = useRef(null);
   const sendMessage = async () => {
     if (!userInput) return;
 
@@ -61,6 +61,7 @@ const App = () => {
       );
 
       const data = response.data;
+      console.log(data.response?.getTestForPortal?.[0]?.html);
       const chatResponse =
         data.response?.getTestForPortal?.[0]?.html || data.response;
 
@@ -151,10 +152,19 @@ const App = () => {
   const getScaleFactor = () => {
     return Math.min(window.innerWidth / 650, 1);
   };
+  useEffect(() => {
+    if (chatlogRef.current) {
+      // Animate the scroll instead of setting it directly
+      chatlogRef.current.scrollTo({
+        top: chatlogRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
   return (
     <div id="chatbox">
       <header>Chatbot</header>
-      <div id="chatlog">
+      <div id="chatlog" ref={chatlogRef}>
         <ul style={{ paddingLeft: "5px" }}>
           {messages.map((message, index) => (
             <li key={index} className={`chat ${message.sender}`}>
