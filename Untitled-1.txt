@@ -1,0 +1,21 @@
+
+        query GetTestCenters($state: String, $district: String) {
+          getTestCenters(state: $state, district: $district) {
+            id
+                      name
+                      region
+                      timing
+                      phone
+                      address
+                      authenticatedUser
+                      createdAt
+                      updatedAt
+                      email
+          }
+        }
+
+
+
+        6f6","createdAt":"2024-06-06T12:45:06.991Z","updatedAt":"2024-06-06T12:45:06.991Z","email":"rishab@gmail.com"},{"name":"barish","region":{"state":{"_id":"63f99fbd519359b7438a84ca","name":"KARNATAKA","createdAt":"2023-02-25T05:42:21.627Z","updatedAt":"2023-10-02T12:58:01.693Z","__v":0,"code":"29"},"district":{"_id":"63f9a066519359b7438a9120","state":"63f99fbd519359b7438a84ca","name":"BENGALURU URBAN","createdAt":"2023-02-25T05:45:10.832Z","updatedAt":"2023-10-02T13:44:38.223Z","__v":0,"code":"525"},"geolocation":{"type":"Point","coordinates":[14.83819327045858,76.45856243093922]},"village":{"_id":"63f9a0ae519359b7438a9659","state":"63f99fbd519359b7438a84ca","district":"63f9a066519359b7438a9120","subdistrict":"63f9a09c519359b7438a950d","name":"BASAVANAPURA","version":"1","status":"Inhabitant","createdAt":"2023-02-25T05:46:22.053Z","updatedAt":"2023-02-25T05:46:22.053Z","__v":0},"subdistrict":{"_id":"63f9a6f8519359b7438b1126","state":"63f99fbd519359b7438a84ca","district":"63f9a5f7519359b7438afd6f","name":"AJJAMPURA","createdAt":"2023-02-25T06:13:12.013Z","updatedAt":"2023-02-25T06:13:12.013Z","__v":0}},"timing":{"from":"","to":""},"phone":"+913456789786","address":"RFQ5+7CF Adavi Sooravvana, Karnataka, India","authenticatedUser":"6661b13e5e1ab7f2357e9f2a","createdAt":"2024-06-06T12:53:18.554Z","updatedAt":"2024-06-06T12:53:18.554Z","email":"harsha@gmail.com"}]}}
+
+        

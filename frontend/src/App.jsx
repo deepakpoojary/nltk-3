@@ -4,14 +4,17 @@ import "./App.css"; // We'll move the CSS into a separate file
 import html2pdf from "html2pdf.js"; // Import html2pdf.js
 import { IoMdSend } from "react-icons/io";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
 const buttons1 = [
+  "Nearest Soil test centre",
   "Soil report",
   "Contact Details",
   "Soil health card",
   "What is SHC",
 ];
+
 const App = () => {
   const settings = {
     dots: false,
@@ -20,28 +23,22 @@ const App = () => {
     slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2500,
   };
   const [messages, setMessages] = useState([
     {
       sender: "bot",
       text: "Hello, How can I help you ?",
-      // buttons: [
-      //   "Get your soil report",
-      //   "Soil health card",
-      //   "What is SHC",
-      //   "Contact Details",
-      // ],
     },
-    // {
-    //   sender: "bot",
-    //   // text: "",
-    //   buttons: ["Soil report ", "suggestions", "Soil health card", "Questions"],
-    // },
   ]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [centers, setCenters] = useState([]);
+  const [mapCenter, setMapCenter] = useState([0, 0]);
+
   const chatlogRef = useRef(null);
+
   const sendMessage = async () => {
     if (!userInput) return;
 
@@ -51,13 +48,12 @@ const App = () => {
     ]);
     setUserInput("");
     setIsLoading(true);
+    setShowMap(false);
     try {
       const response = await axios.post(
         "/chat",
         { message: userInput },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
 
       const data = response.data;
@@ -79,42 +75,70 @@ const App = () => {
       setIsLoading(false);
     }
   };
+
   const handleButtonClick = async (option) => {
-    // if (!userInput) return;
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { sender: "User", text: option },
-    ]);
-    setUserInput("");
-    setIsLoading(true);
-    try {
-      const response = await axios.post(
-        "/chat",
-        { message: option },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-
-      const data = response.data;
-      const chatResponse =
-        data.response?.getTestForPortal?.[0]?.html || data.response;
-
+    setShowMap(false);
+    if (option === "Nearest Soil test centre") {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            try {
+              const response = await axios.post(
+                "http://127.0.0.1:5000/getcenters",
+                { latitude, longitude },
+                { headers: { "Content-Type": "application/json" } }
+              );
+              setCenters(response.data);
+              console.log(response);
+              setMapCenter([latitude, longitude]);
+              console.log([latitude, longitude]);
+              setShowMap(true);
+            } catch (error) {
+              console.error("Error fetching nearest centers:", error);
+            }
+          },
+          (error) => {
+            console.error("Error getting user's location:", error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
+    } else {
       setMessages((prevMessages) => [
         ...prevMessages,
-        {
-          sender: "Bot",
-          text: chatResponse,
-          isHtml: !!data.response?.getTestForPortal?.[0]?.html,
-        },
+        { sender: "User", text: option },
       ]);
-    } catch (error) {
-      console.error("Error fetching chat response:", error);
-    } finally {
-      setIsLoading(false);
+      setUserInput("");
+      setIsLoading(true);
+      try {
+        const response = await axios.post(
+          "http://127.0.0.1:5000/chat",
+          { message: option },
+          { headers: { "Content-Type": "application/json" } }
+        );
+
+        const data = response.data;
+        const chatResponse =
+          data.response?.getTestForPortal?.[0]?.html || data.response;
+
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            sender: "Bot",
+            text: chatResponse,
+            isHtml: !!data.response?.getTestForPortal?.[0]?.html,
+          },
+        ]);
+      } catch (error) {
+        console.error("Error fetching chat response:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
+
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       sendMessage();
@@ -149,9 +173,11 @@ const App = () => {
         });
     }
   };
+
   const getScaleFactor = () => {
     return Math.min(window.innerWidth / 650, 1);
   };
+
   useEffect(() => {
     if (chatlogRef.current) {
       // Animate the scroll instead of setting it directly
@@ -161,6 +187,7 @@ const App = () => {
       });
     }
   }, [messages]);
+
   return (
     <div id="chatbox">
       <header>Chatbot</header>
@@ -175,17 +202,13 @@ const App = () => {
                 >
                   {message.sender === "User" ? "face" : "smart_toy"}
                 </span>
-
-                {/* <strong>{message.sender}:</strong> */}
                 <span className="message-space"></span>
                 {message.isHtml && (
                   <>
                     <div
                       className="html-frame"
                       style={{
-                        // transform: `scale(${getScaleFactor()})`,
                         transformOrigin: "top left",
-                        // backgroundColor: "white",
                       }}
                     >
                       <span
@@ -228,17 +251,50 @@ const App = () => {
           </p>
         )}
       </div>
+      {showMap && (
+        <div style={{ height: "200px", width: "100%", flexShrink: 0 }}>
+          <MapContainer
+            center={mapCenter}
+            zoom={7}
+            style={{ height: "100%", width: "100%" }}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {centers.map((center, idx) => (
+              <Marker
+                key={idx}
+                position={[
+                  center.region.geolocation.coordinates[1],
+                  center.region.geolocation.coordinates[0],
+                ]}
+              >
+                <Popup>
+                  <div>
+                    <h3>{center.name}</h3>
+                    <p>{center.address}</p>
+                    <p>{center.phone}</p>
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${center.region.geolocation.coordinates[1]},${center.region.geolocation.coordinates[0]}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Get Directions
+                    </a>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+      )}
       <div className="button-slider1">
         <Slider {...settings}>
           {buttons1.map((button, idx) => (
             <div key={idx} className="button-container">
-              {/* Improved button styling with semantic class and hover effect */}
               <button
                 className="chat-button"
                 onClick={() => handleButtonClick(button)}
               >
-                {button.trim()}{" "}
-                {/* Remove trailing spaces for better display */}
+                {button.trim()}
               </button>
             </div>
           ))}
@@ -255,12 +311,6 @@ const App = () => {
         />
         <IoMdSend className="custom-send-icon" onClick={sendMessage} />
       </div>
-
-      {/* {!isLoading && (
-        <button className="thisbutton" onClick={fetchHtmlContent}>
-          Fetch HTML Content
-        </button>
-      )} */}
     </div>
   );
 };

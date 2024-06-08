@@ -10,6 +10,9 @@ from gql import Client, gql
 from gql.transport.requests import RequestsHTTPTransport
 import json
 import os
+from flask_cors import CORS
+import logging
+
 load_dotenv()
 
 # Get the JSON token from environment variables
@@ -136,10 +139,108 @@ def chatbot_response(user_message):
 
 
 app = Flask(__name__)
-
+CORS(app)
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('gql.transport.requests').setLevel(logging.WARNING)
 @app.route("/")
 def home():
     return render_template("index.html")
+
+@app.route("/getcenters",methods=["POST"])
+def get_nearest_centers():
+    data = request.get_json()
+    if not data:
+        app.logger.error("No JSON data received")
+        return jsonify({"error": "No data received"}), 400
+    latitude = data.get('latitude')
+    longitude = data.get('longitude')
+    # app.logger.debug(f"Received latitude: {latitude}, longitude: {longitude}")  
+    if not latitude or not longitude:
+        app.logger.error("Latitude or longitude is missing in the request")
+
+        return jsonify({"error": "Invalid latitude or longitude"}), 400
+
+    # Query a Geocoding API to get state and district
+    # geocode_url = f'https://api.yourgeocodingapi.com/geocode?lat={latitude}&lon={longitude}&key=YOUR_GEOCODING_API_KEY'
+    # geocode_response = requests.get(geocode_url)
+    # if geocode_response.status_code != 200:
+    #     return jsonify({"error": "Failed to get geocode data"}), 500
+
+    # geocode_data = geocode_response.json()
+    # state = geocode_data['state']
+    # district = geocode_data['district']
+
+    # Query the GraphQL endpoint
+    try:
+        latitude = float(latitude)
+        longitude = float(longitude)
+    except ValueError:
+        app.logger.error("Latitude or longitude is not a valid number")
+        return jsonify({"error": "Invalid latitude or longitude"}), 400
+    
+    query = gql("""
+    query GetTestCenters {
+        getTestCenters {
+                      name
+                      region
+                      timing
+                      phone
+                      address
+                      authenticatedUser
+                      createdAt
+                      updatedAt
+                      email
+        }
+    }
+    """)
+    try:
+        # this block is basically not working
+        gql_response = client.execute(query)
+        # app.logger.debug(f"GraphQL response: {gql_response}")
+        test_centers = gql_response['getTestCenters']
+        # print(test_centers)
+        # Calculate distance and filter nearby test centers (within 50 km radius for example)
+        def calculate_distance(lat1, lon1, lat2, lon2):
+            from math import radians, sin, cos, sqrt, atan2
+
+            R = 6371  # Radius of the Earth in km
+            dlat = radians(lat2 - lat1)
+            dlon = radians(lon2 - lon1)
+            a = sin(dlat / 2) ** 2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon / 2) ** 2
+            c = 2 * atan2(sqrt(a), sqrt(1 - a))
+            distance = R * c
+            return distance
+        
+        
+        # for center in :
+        print(test_centers[0]['region']['geolocation']['coordinates'][1])
+        valid_centers = []
+        for center in test_centers:
+            if ('region' in center and 
+                'geolocation' in center['region'] and 
+                'coordinates' in center['region']['geolocation'] and
+                len(center['region']['geolocation']['coordinates']) == 2):
+                
+                try:
+                    center_latitude = float(center['region']['geolocation']['coordinates'][1])
+                    center_longitude = float(center['region']['geolocation']['coordinates'][0])
+                    
+                    app.logger.debug(f"Processing center: {center['name']}, lat: {center_latitude}, lon: {center_longitude}")
+                    
+                    if calculate_distance(latitude, longitude, center_latitude, center_longitude) <= 150:
+                        valid_centers.append(center)
+                except (ValueError, TypeError) as e:
+                    app.logger.error(f"Invalid geolocation data for center {center['name']}: {e}")
+        print(valid_centers[0])
+        return jsonify(valid_centers)
+
+        
+        
+        # return jsonify(nearby_centers)
+        
+    except Exception as e:
+        app.logger.error(f"Error querying test centers: {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/chat", methods=["POST"])
