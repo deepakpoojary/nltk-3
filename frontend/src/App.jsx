@@ -5,8 +5,17 @@ import html2pdf from "html2pdf.js"; // Import html2pdf.js
 import { IoMdSend } from "react-icons/io";
 import Slider from "react-slick";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-
+const icon = L.icon({
+  iconUrl: "/public/marker-icon-2x.png",
+  iconSize: [25, 41], // Size of the icon
+  iconAnchor: [12, 41], // Point of the icon which will correspond to marker's location
+  popupAnchor: [1, -34], // Point from which the popup should open relative to the iconAnchor
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  shadowSize: [41, 41],
+});
 const buttons1 = [
   "Nearest Soil test centre",
   "Soil report",
@@ -266,6 +275,7 @@ const App = () => {
                   center.region.geolocation.coordinates[1],
                   center.region.geolocation.coordinates[0],
                 ]}
+                icon={icon}
               >
                 <Popup>
                   <div>
