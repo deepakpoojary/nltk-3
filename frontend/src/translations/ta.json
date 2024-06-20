@@ -1,0 +1,43 @@
+{
+  "suggestions": "இங்கு சில பரிமாணங்கள் உள்ளன:",
+  "enterValues": "நைட்ரஜன், போச்பரஸ் மற்றும் போட்டாசியம் மதிப்புகளை உள்ளிடவும்:",
+  "messages": {
+    "welcome": "அரட்டைதொலைபேசிக்கு வரவேற்கிறோம்!"
+  },
+
+  "chatbot": "அரட்டைரங்கம்",
+  "themePicker": {
+    "label": "தீம் தேர்ந்தெடு:",
+    "options": {
+      "green": "பச்சை",
+      "purple": "ஊதா"
+    }
+  },
+  "languagePicker": {
+    "label": "மொழி தேர்ந்தெடு:",
+    "options": {
+      "en": "ஆங்கிலம்",
+      "hi-IN": "இந்தி",
+      "kn-IN": "கன்னடம்",
+      "ta-IN": "தமிழ்",
+      "te-IN": "தெலுங்கு"
+    }
+  },
+  "loading": "ஏற்றுகிறது...",
+  "submit": "சமர்ப்பிக்கவும்",
+  "nitrogen": "நைட்ரஜன்:",
+  "phosphorous": "பாஸ்பரஸ்:",
+  "potassium": "பொட்டாசியம்:",
+  "typeMessage": "உங்கள் செய்தியை இங்கு தட்டச்சு செய்யவும்",
+  "downloadPdf": "PDF ஐப் பதிவிறக்குக",
+  "getDirections": "வழிமுறைகளைப் பெறுக",
+  "inputPlaceholder": "உங்கள் செய்தியை இங்கு টাইப் செய்யவும்",
+  "buttons": {
+    "nearestSoilTestCentre": "அருகிலுள்ள மண் பரிசோதனை மையம்",
+    "soilReport": "மண் அறிக்கை",
+    "contactDetails": "தொடர்பு விவரங்கள்",
+    "soilHealthCard": "மண் ஆரோக்கிய அட்டை",
+    "whatIsSHC": "SHC என்ன",
+    "npkValuesSet": "NPK மதிப்புகள்"
+  }
+}

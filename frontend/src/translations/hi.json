@@ -1,0 +1,42 @@
+{
+  "suggestions": "यहां कुछ सुझाव हैं:",
+  "enterValues": "कृपया नाइट्रोजन, फॉस्फोरस और पोटैशियम के मान दर्ज करें:",
+  "messages": {
+    "welcome": "मिट्टी स्वास्थ्य कार्ड चैटबॉट में आपका स्वागत है!"
+  },
+  "chatbot": "चैटबॉट",
+  "themePicker": {
+    "label": "थीम चुनें:",
+    "options": {
+      "green": "हरा",
+      "purple": "बैंगनी"
+    }
+  },
+  "languagePicker": {
+    "label": "भाषा चुनें:",
+    "options": {
+      "en": "अंग्रेज़ी",
+      "hi-IN": "हिंदी",
+      "kn-IN": "कन्नड़",
+      "ta-IN": "तमिल",
+      "te-IN": "तेलुगु"
+    }
+  },
+  "loading": "लोड हो रहा है...",
+  "submit": "प्रस्तुत",
+  "nitrogen": "नाइट्रोजन:",
+  "phosphorous": "फॉस्फोरस:",
+  "potassium": "पोटेशियम:",
+  "typeMessage": "यहां अपना संदेश टाइप करें",
+  "downloadPdf": "पीडीएफ डाउनलोड करें",
+  "getDirections": "निर्देश प्राप्त करें",
+  "inputPlaceholder": "अपना संदेश यहाँ टाइप करें",
+  "buttons": {
+    "nearestSoilTestCentre": "निकटतम मिट्टी परीक्षण केंद्र",
+    "soilReport": "मिट्टी की रिपोर्ट",
+    "contactDetails": "संपर्क विवरण",
+    "soilHealthCard": "मिट्टी स्वास्थ्य कार्ड",
+    "whatIsSHC": "SHC क्या है",
+    "npkValuesSet": "NPK मान सेट करें"
+  }
+}

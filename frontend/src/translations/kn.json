@@ -1,0 +1,42 @@
+{
+  "suggestions": "ಇಲ್ಲಿ ಕೆಲವು ಸೂಚನೆಗಳಿವೆ:",
+  "enterValues": "ನೈಟ್ರೊಜನ್, ಫಾಸ್ಫೊರಸ್ ಮತ್ತು ಪೊಟಾಷಿಯಂ ಮೌಲ್ಯಗಳನ್ನು ದಯವಿಟ್ಟು ನಮೂದಿಸಿ:",
+  "messages": {
+    "welcome": "ಚಾಟ್‌ಬಾಟ್‌ಗೆ ಸುಸ್ವಾಗತ!"
+  },
+  "chatbot": "ಚಾಟ್‌ಬಾಟ್",
+  "themePicker": {
+    "label": "ಥೀಮ್ ಆಯ್ಕೆಮಾಡಿ:",
+    "options": {
+      "green": "ಹಸಿರು",
+      "purple": "ನೇರಳೆ"
+    }
+  },
+  "languagePicker": {
+    "label": "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ:",
+    "options": {
+      "en": "ಇಂಗ್ಲೀಷ್",
+      "hi-IN": "ಹಿಂದಿ",
+      "kn-IN": "ಕನ್ನಡ",
+      "ta-IN": "ತಮಿಳು",
+      "te-IN": "ತೆಲುಗು"
+    }
+  },
+  "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
+  "submit": "ಸಲ್ಲಿಸು",
+  "nitrogen": "ನೈಟ್ರೋಜನ್:",
+  "phosphorous": "ಫಾಸ್ಫರಸ್:",
+  "potassium": "ಪೊಟ್ಯಾಷಿಯಂ:",
+  "typeMessage": "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ",
+  "downloadPdf": "ಪಿಡಿಎಫ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
+  "getDirections": "ದಾರಿಯನ್ನು ಪಡೆಯಿರಿ",
+  "inputPlaceholder": "ನಿಮ್ಮ ಸಂದೇಶವನ್ನು ಇಲ್ಲಿ ಟೈಪ್ ಮಾಡಿ",
+  "buttons": {
+    "nearestSoilTestCentre": "ನಿಕಟದ ಮಣ್ಣಿನ ಪರೀಕ್ಷಾ ಕೇಂದ್ರ",
+    "soilReport": "ಮಣ್ಣು ವರದಿ",
+    "contactDetails": "ಸಂಪರ್ಕ ವಿವರಗಳು",
+    "soilHealthCard": "ಮಣ್ಣು ಆರೋಗ್ಯ ಕಾರ್ಡ್",
+    "whatIsSHC": "SHC ಎಂದರೇನು",
+    "npkValuesSet": "NPK ಮೌಲ್ಯಗಳು"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "suggestions": "Here are some suggestions:",
+  "enterValues": "Please enter the values for Nitrogen, Phosphorous, and Potassium:",
+  "messages": {
+    "welcome": "Welcome to the Soil Health Card chatbott!"
+  },
+  "chatbot": "Chatbot",
+  "themePicker": {
+    "label": "Choose Theme:",
+    "options": {
+      "green": "Green",
+      "purple": "Purple"
+    }
+  },
+  "languagePicker": {
+    "label": "Choose Language:",
+    "options": {
+      "en": "English",
+      "hi-IN": "Hindi",
+      "kn-IN": "Kannada",
+      "ta-IN": "Tamil",
+      "te-IN": "Telugu"
+    }
+  },
+  "loading": "Loading...",
+  "submit": "Submit",
+  "nitrogen": "Nitrogen:",
+  "phosphorous": "Phosphorous:",
+  "potassium": "Potassium:",
+  "carbon": "Carbon",
+  "typeMessage": "Type your message here",
+  "downloadPdf": "Download PDF",
+  "getDirections": "Get Directions",
+  "inputPlaceholder": "Type your message here",
+  "buttons": {
+    "nearestSoilTestCentre": "Nearest Soil test centre",
+    "soilReport": "Soil report",
+    "contactDetails": "Contact Details",
+    "soilHealthCard": "Soil health card",
+    "whatIsSHC": "What is SHC",
+    "npkValuesSet": "NPK values set"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "suggestions": "ఇక్కడ కొన్ని సూచనలు ఉన్నాయి:",
+  "enterValues": "நைட்ரஜன், போச்பரஸ் மற்றும் போட்டாசியம் மதிப்புகளை உள்ளிடவும்:",
+  "messages": {
+    "welcome": "అరట్టైటెలిఫోన్ కు స్వాగతం!"
+  },
+
+  "chatbot": "అరట్టైరంగం",
+  "themePicker": {
+    "label": "థీమ్ ఎంచుకోండి:",
+    "options": {
+      "green": "ఆకుపచ్చ",
+      "purple": "ఉదా"
+    }
+  },
+  "languagePicker": {
+    "label": "భాష ఎంచుకోండి:",
+    "options": {
+      "en": "ఆంగ్లం",
+      "hi-IN": "హింది",
+      "kn-IN": "కన్నడం",
+      "ta-IN": "తమిళం",
+      "te-IN": "తెలుగు"
+    }
+  },
+  "loading": "లోడ్ అవుతోంది...",
+  "submit": "సమర్పించండి",
+  "nitrogen": "నైట్రోజన్:",
+  "phosphorous": "ఫాస్పరస్:",
+  "potassium": "పొటాషియం:",
+  "typeMessage": "మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి",
+  "downloadPdf": "PDF ను డౌన్లోడ్ చేయండి",
+  "getDirections": "దారులు పొందండి",
+  "inputPlaceholder": "మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి",
+  "buttons": {
+    "nearestSoilTestCentre": "సమీపంలోని మట్టి పరీక్షా కేంద్రం",
+    "soilReport": "మట్టి నివేదిక",
+    "contactDetails": "సంప్రదింపు వివరాలు",
+    "soilHealthCard": "మట్టి ఆరోగ్య కార్డు",
+    "whatIsSHC": "SHC అంటే ఏమిటి",
+    "npkValuesSet": "NPK విలువలు"
+  }
+}
