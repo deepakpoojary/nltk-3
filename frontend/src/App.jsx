@@ -151,7 +151,7 @@ const App = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/translate",
+        "https://8e5d-202-140-36-183.ngrok-free.app/api/translate",
         { message: userInput, language: language },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -204,7 +204,7 @@ const App = () => {
     setShowMap(false);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:5000/api/translate", //here change later
+        "https://8e5d-202-140-36-183.ngrok-free.app/api/translate", //here change later
         { message: userInput, language: language },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -269,7 +269,7 @@ const App = () => {
             const { latitude, longitude } = position.coords;
             try {
               const response = await axios.post(
-                "http://127.0.0.1:5000/getcenters",
+                "https://8e5d-202-140-36-183.ngrok-free.app/getcenters",
                 { latitude, longitude },
                 { headers: { "Content-Type": "application/json" } }
               );
@@ -299,7 +299,7 @@ const App = () => {
       setIsLoading(true);
       try {
         const response = await axios.post(
-          "http://127.0.0.1:5000/chat1",
+          "https://8e5d-202-140-36-183.ngrok-free.app/chat1",
           { message: option, language: language },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -337,20 +337,23 @@ const App = () => {
 
     try {
       // const response = await axios.post(
-      //   "http://127.0.0.1:5000/npk",
+      //   "https://8e5d-202-140-36-183.ngrok-free.app/npk",
       //   // {
       //   //   message: `Nitrogen ${npkValues.Nitrogen}, Phosphorous ${npkValues.Phosphorous}, Potassium ${npkValues.Potassium},Carbon ${npkValues.Carbon},State ${npkValues.State},Crop ${npkValues.Crops}`,
       //   // },
       //   { headers: { "Content-Type": "application/json" } },
       //   { body: JSON.stringify(npkValues) }
       // );
-      const response = await fetch("http://127.0.0.1:5000/npk", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(npkValues), // Convert npkValues object to JSON string
-      });
+      const response = await fetch(
+        "https://8e5d-202-140-36-183.ngrok-free.app/npk",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(npkValues), // Convert npkValues object to JSON string
+        }
+      );
 
       // const data = response.data;
       const data = await response.json(); // Wait for response to be parsed as JSON
@@ -401,7 +404,7 @@ const App = () => {
             const { latitude, longitude } = position.coords;
             try {
               const response = await axios.post(
-                "http://127.0.0.1:5000/getcenters",
+                "https://8e5d-202-140-36-183.ngrok-free.app/getcenters",
                 { latitude, longitude },
                 { headers: { "Content-Type": "application/json" } }
               );
@@ -430,7 +433,7 @@ const App = () => {
       setIsLoading(true);
       try {
         const response = await axios.post(
-          "http://127.0.0.1:5000/chat1",
+          "https://8e5d-202-140-36-183.ngrok-free.app/chat1",
           { message: option },
           { headers: { "Content-Type": "application/json" } }
         );
@@ -528,10 +531,13 @@ const App = () => {
     // utterance.lang = language;
     // window.speechSynthesis.speak(utterance);
     try {
-      const response = await axios.post("http://127.0.0.1:5000/api/tts", {
-        text: text,
-        languageCode: language,
-      });
+      const response = await axios.post(
+        "https://8e5d-202-140-36-183.ngrok-free.app/api/tts",
+        {
+          text: text,
+          languageCode: language,
+        }
+      );
       const audioContent = response.data.audioContent;
       const audio = new Audio(`data:audio/mp3;base64,${audioContent}`);
       setIsPlaying(true);
